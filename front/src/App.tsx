@@ -22,6 +22,9 @@ const App: React.FC = () => {
             <Route path="/quiz" element={<QuizPage />} />
             <Route path="/contact" element={<ContactPage />} /> {/* Add the ContactPage route */}
             <Route path="*" element={<NotFound />} />
+            <Route path="/404" element={<NotFound />} />
+            <Route path="/500" element={<NotFound />} />
+
           </Routes>
         </Router>
       </ThemeContextProvider>

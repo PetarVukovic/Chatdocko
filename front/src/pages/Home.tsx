@@ -7,7 +7,7 @@ import { useColorMode } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import CroatianFlag from '../assets/croatian-flag.png';
 import EnglishFlag from '../assets/en-flag.png';
-import RobotImage from '../assets/robot.jpg'; // Import the image
+import RobotImage from '../assets/robot.jpg';
 import 'tailwindcss/tailwind.css';
 import Pricing from '../components/Pricing';
 
@@ -51,6 +51,7 @@ const Home: React.FC = () => {
                         <Button variant="ghost">{t('home.features_button')}</Button>
                         <Link to="/contact"><Button variant="ghost">{t('home.contact_button')}</Button></Link>
                         <Link to="/chat"><Button colorScheme="teal">{t('home.get_started')}</Button></Link>
+                        <Link to="/login"><Button colorScheme="teal">{t('home.login')}</Button></Link>
                         <IconButton aria-label="Toggle dark mode" icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />} onClick={toggleColorMode} />
                         <IconButton aria-label="Switch to Croatian" icon={<Image src={CroatianFlag} alt="Croatian Flag" boxSize={6} />} onClick={() => changeLanguage('hr')} />
                         <IconButton aria-label="Switch to English" icon={<Image src={EnglishFlag} alt="English Flag" boxSize={6} />} onClick={() => changeLanguage('en')} />
@@ -58,7 +59,7 @@ const Home: React.FC = () => {
                 </Flex>
             </Box>
 
-            {/* Main and Features Section with Background */}
+            {/* Main and Steps Section with Background */}
             <Box
                 position="relative"
                 bgImage={`url(${RobotImage})`}
@@ -73,45 +74,70 @@ const Home: React.FC = () => {
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    bg: 'rgba(173, 216, 230, 0.5)', // Light blue overlay
+                    bg: 'rgba(173, 216, 230, 0.5)',
                     zIndex: '-1',
-                    backdropFilter: 'blur(2px)', // Optional blur effect
+                    backdropFilter: 'blur(2px)',
                 }}
             >
-                {/* Welcome Section */}
-                <Box
-                    position="relative" // Postavlja pozicioniranje u odnosu na roditeljski element
-                    maxW="md" // Maksimalna širina box-a
-                    mx="auto" // Centriranje na manjim uređajima
-                    bg="rgba(255, 255, 255, 0.8)" // Bijela pozadina s transparentnošću
-                    borderRadius="md" // Zaobljeni rubovi
-                    p={6} // Padding unutar box-a
-                    boxShadow="lg" // Sjenilo za box
-                    className="animate-slideInLeft" // Animacija za dolazak s lijeve strane
-                    zIndex="10" // Viši z-index kako bi bio iznad pozadinske slike
-                >
-                    <VStack
-                        alignItems="start"
-                        spacing={4}
+                {/* Welcome and Steps Section */}
+                <Flex justifyContent="space-around" alignItems="center" mt={16} px={4}>
+                    <Box
+                        maxW="md"
+                        w="full"
+                        bg="rgba(255, 255, 255, 0.8)"
+                        borderRadius="md"
+                        p={6}
+                        boxShadow="lg"
+                        className="animate-slideInLeft"
+                        zIndex="10"
                     >
-                        <Heading size="2xl" color={colorMode === 'light' ? 'gray.800' : 'gray.800'}>
-                            {t('home.welcome')}
+                        <VStack alignItems="start" spacing={4}>
+                            <Heading size="2xl" color={colorMode === 'light' ? 'gray.800' : 'gray.800'}>
+                                {t('home.welcome')}
+                            </Heading>
+                            <Text fontSize="lg" color={colorMode === 'light' ? 'gray.600' : 'gray.300'}>
+                                <b>Explore the future</b> with <b>ChatDocko AI</b>, a platform that empowers your learning experience with AI-driven insights and personalized content. Enhance your skills and knowledge with our intuitive features and user-friendly interface.
+                            </Text>
+                            <Text fontSize="lg" color={colorMode === 'light' ? 'gray.600' : 'gray.300'}>
+                                Our AI platform offers <b>advanced features</b> like real-time chat assistance, document analysis, and more. Join us in revolutionizing the way you learn and grow.
+                            </Text>
+                            <Link to="/chat">
+                                <Button colorScheme="teal" size="lg" className="animate-buttonMove">
+                                    {t('home.get_started')}
+                                </Button>
+                            </Link>
+                        </VStack>
+                    </Box>
+
+                    <Box
+                        maxW="md"
+                        w="full"
+                        bg="rgba(255, 255, 255, 0.8)"
+                        borderRadius="md"
+                        p={6}
+                        boxShadow="lg"
+                        className="animate-slideInRight"
+                        zIndex="10"
+                    >
+                        <Heading size="md" color={colorMode === 'light' ? 'gray.800' : 'gray.800'} mb={4}>
+                            It's simple as this
                         </Heading>
-                        <Text fontSize="lg" color={colorMode === 'light' ? 'gray.600' : 'gray.300'}>
-                            <b>Explore the future</b> with <b>ChatDocko AI</b>, a platform that empowers your learning experience with AI-driven insights and personalized content. Enhance your skills and knowledge with our intuitive features and user-friendly interface.
-                        </Text>
-                        <Text fontSize="lg" color={colorMode === 'light' ? 'gray.600' : 'gray.300'}>
-                            Our AI platform offers <b>advanced features</b> like real-time chat assistance, document analysis, and more. Join us in revolutionizing the way you learn and grow.
-                        </Text>
-                        <Link to="/chat">
-                            <Button colorScheme="teal" size="lg" className="animate-buttonMove">
-                                {t('home.get_started')}
-                            </Button>
-                        </Link>
-                    </VStack>
-                </Box>
-
-
+                        <VStack spacing={4} alignItems="stretch">
+                            <Box p={4} bg={colorMode === 'light' ? 'white' : 'gray.700'} borderRadius="md" shadow="sm">
+                                <Heading size="sm" color={colorMode === 'light' ? 'gray.800' : 'gray.200'}>Step 1</Heading>
+                                <Text color={colorMode === 'light' ? 'gray.600' : 'gray.300'}>Register. Start for free, or choose our pro version.</Text>
+                            </Box>
+                            <Box p={4} bg={colorMode === 'light' ? 'white' : 'gray.700'} borderRadius="md" shadow="sm">
+                                <Heading size="sm" color={colorMode === 'light' ? 'gray.800' : 'gray.200'}>Step 2</Heading>
+                                <Text color={colorMode === 'light' ? 'gray.600' : 'gray.300'}>Upload your PDF. We'll process your file and make it ready for you to talk to.</Text>
+                            </Box>
+                            <Box p={4} bg={colorMode === 'light' ? 'white' : 'gray.700'} borderRadius="md" shadow="sm">
+                                <Heading size="sm" color={colorMode === 'light' ? 'gray.800' : 'gray.200'}>Step 3</Heading>
+                                <Text color={colorMode === 'light' ? 'gray.600' : 'gray.300'}>Start asking questions. It's that simple. Try Chat-docs AI today. It takes less than a minute.</Text>
+                            </Box>
+                        </VStack>
+                    </Box>
+                </Flex>
 
                 {/* Features Section */}
                 <Box className="py-32 px-6 bg-gradient-to-r from-teal-500 to-blue-400 animate-fadeIn">
@@ -189,9 +215,9 @@ const Home: React.FC = () => {
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    bg: 'rgba(173, 216, 230, 0.5)', // Light blue overlay
+                    bg: 'rgba(173, 216, 230, 0.5)',
                     zIndex: '-1',
-                    backdropFilter: 'blur(2px)', // Optional blur effect
+                    backdropFilter: 'blur(2px)',
                 }}
                 className="animate-fadeIn"
             >
@@ -213,6 +239,13 @@ const Home: React.FC = () => {
                 }
                 .animate-slideInLeft {
                     animation: slideInLeft 0.7s ease-in-out;
+                }
+                @keyframes slideInRight {
+                    from { opacity: 0; transform: translateX(100%); }
+                    to { opacity: 1; transform: translateX(0); }
+                }
+                .animate-slideInRight {
+                    animation: slideInRight 0.7s ease-in-out;
                 }
                 @keyframes fadeIn {
                     from { opacity: 0; }
