@@ -21,6 +21,7 @@
     "@fullcalendar/react": "^6.1.15",
     "@fullcalendar/timegrid": "^6.1.15",
     "@types/axios": "^0.14.0",
+    "animate.css": "^4.1.1",
     "axios": "^1.7.3",
     "chart.js": "^4.4.3",
     "framer-motion": "^11.3.21",
