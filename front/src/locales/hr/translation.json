@@ -1,0 +1,42 @@
+{
+    "contact": {
+        "heading": "Kontaktirajte nas",
+        "team_heading": "Upoznajte tim",
+        "petar_name": "Petar Vuković",
+        "petar_title": "Inženjer za AI/ML",
+        "petar_description": "S velikim iskustvom u AI i strojnog učenja, Petar vodi tehničke aspekte naših projekata. Njegova stručnost osigurava da isporučujemo inovativna i učinkovita rješenja za automatizaciju i analitiku.",
+        "josipa_name": "Josipa Vuković",
+        "josipa_title": "Analitičarka i specijalistica za marketing",
+        "josipa_description": "Josipa se specijalizirala za analizu tržišta i digitalne marketinške strategije. Pomaže našim klijentima razumjeti njihovo tržište i učinkovito doći do svoje ciljne publike putem analitičkih podataka i inovativnih marketinških rješenja.",
+        "info_heading": "Kontakt informacije",
+        "follow_us": "Pratite nas",
+        "form_heading": "Stupite u kontakt",
+        "form_description": "Ako imate bilo kakvih pitanja ili biste htjeli stupiti u kontakt, molimo ispunite obrazac ispod.",
+        "form_name_placeholder": "Vaše ime",
+        "form_email_placeholder": "Vaša e-pošta",
+        "form_message_placeholder": "Vaša poruka",
+        "send_message": "Pošaljite poruku",
+        "services_heading": "Naše usluge",
+        "automation_title": "Automatizacija",
+        "automation_description": "Automatizacija poslovnih procesa koristeći",
+        "friend_pages": "Prijateljske stranice"
+    },
+    "home": {
+        "home_button": "Početna",
+        "features_button": "Značajke",
+        "contact_button": "Kontakt",
+        "get_started": "Započni",
+        "welcome": "Dobrodošli u ChatDocko AI",
+        "description": "Povežite se sa svojim udžbenicima, testovima i PDF-ovima na potpuno novi način. ChatDocko AI nudi besprijekorno sučelje za studente i učitelje za interakciju s njihovim obrazovnim materijalima. Poboljšajte svoje iskustvo učenja uz AI pogonjene uvide i interaktivni sadržaj.",
+        "features": "Ključne Značajke",
+        "feature1": "Interaktivni AI Chat",
+        "feature1_description": "Čavrljajte sa svojim knjigama i dobivajte odgovore na svoja pitanja u stvarnom vremenu.",
+        "feature2": "Besprijekorna Integracija",
+        "feature2_description": "Jednostavno učitajte i integrirajte svoje materijale za učenje, uključujući testove i PDF-ove.",
+        "feature3": "AI Uvidi",
+        "feature3_description": "Iskoristite napredni AI za dobivanje uvida i poboljšanje vašeg iskustva učenja.",
+        "what_people_say": "Što Ljudi Kažu O Nama",
+        "cta_title": "Spremni za početak?",
+        "cta_description": "Registrirajte se sada i podignite svoje učenje na novu razinu uz ChatDocko AI."
+    }
+}

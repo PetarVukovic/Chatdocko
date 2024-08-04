@@ -5,6 +5,9 @@ import Home from './pages/Home';
 import ChatInterface from './pages/ChatInterface';
 import ScheduleLearning from './pages/ScheduleLearning';
 import { ThemeContextProvider } from './context/ThemeContext';
+import QuizPage from './pages/QuizPage';
+import ContactPage from './pages/ContactPage';
+import NotFound from './pages/NotFound';
 
 const App: React.FC = () => {
   return (
@@ -16,6 +19,9 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/chat" element={<ChatInterface />} />
             <Route path="/schedule-learning" element={<ScheduleLearning />} />
+            <Route path="/quiz" element={<QuizPage />} />
+            <Route path="/contact" element={<ContactPage />} /> {/* Add the ContactPage route */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>
       </ThemeContextProvider>

@@ -1,12 +1,22 @@
+// src/pages/Home.tsx
 import React from 'react';
-import { Box, Button, Flex, Heading, Stack, Text, VStack, IconButton, useColorMode, Avatar } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Stack, Text, VStack, IconButton, useColorMode, Avatar, Image } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { FaCog, FaHammer, FaMagic } from 'react-icons/fa';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-import Pricing from '../components/Pricing'; // Import the Pricing component
+import Pricing from '../components/Pricing';
+import { useTranslation } from 'react-i18next';
+import CroatianFlag from '../assets/croatian-flag.png';
+import EnglishFlag from '../assets/en-flag.png';
 
 const Home: React.FC = () => {
     const { colorMode, toggleColorMode } = useColorMode();
+    const { i18n, t } = useTranslation();
+
+    const changeLanguage = (lng: string) => {
+        i18n.changeLanguage(lng);
+    };
+
     return (
         <Box className="min-h-screen" bg={colorMode === 'light' ? 'gray.50' : 'gray.900'}>
             {/* Header */}
@@ -20,14 +30,27 @@ const Home: React.FC = () => {
                         ChatDocko AI
                     </Heading>
                     <Stack direction="row" spacing={4} alignItems="center">
-                        <Button variant="ghost">Home</Button>
-                        <Button variant="ghost">Features</Button>
-                        <Button variant="ghost">Contact</Button>
-                        <Link to="/chat"><Button colorScheme="teal">Get Started</Button></Link>
+                        <Button variant="ghost">{t('home.home_button')}</Button>
+                        <Button variant="ghost">{t('home.features_button')}</Button>
+                        <Link to="/contact"><Button variant="ghost">{t('home.contact_button')}</Button></Link>
+                        <Link to="/chat"><Button colorScheme="teal">{t('home.get_started')}</Button></Link>
+
                         <IconButton
                             aria-label="Toggle dark mode"
                             icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                             onClick={toggleColorMode}
+                        />
+
+                        {/* Flag Switcher */}
+                        <IconButton
+                            aria-label="Switch to Croatian"
+                            icon={<Image src={CroatianFlag} alt="Croatian Flag" boxSize={6} />}
+                            onClick={() => changeLanguage('hr')}
+                        />
+                        <IconButton
+                            aria-label="Switch to English"
+                            icon={<Image src={EnglishFlag} alt="English Flag" boxSize={6} />}
+                            onClick={() => changeLanguage('en')}
                         />
                     </Stack>
                 </Flex>
@@ -47,14 +70,12 @@ const Home: React.FC = () => {
                         className="3d-effect text-container"
                     >
                         <Heading size="2xl" color={colorMode === 'light' ? 'gray.800' : 'white'}>
-                            Welcome to ChatDocko AI
+                            {t('home.welcome')}
                         </Heading>
                         <Text fontSize="lg" color={colorMode === 'light' ? 'gray.600' : 'gray.300'}>
-                            Connect with your textbooks, tests, and PDFs in a whole new way. ChatDocko AI offers a
-                            seamless interface for students and teachers to interact with their educational materials.
-                            Enhance your learning experience with AI-driven insights and interactive content.
+                            {t('home.description')}
                         </Text>
-                        <Link to="/chat"><Button colorScheme="teal" size="lg">Get Started</Button></Link>
+                        <Link to="/chat"><Button colorScheme="teal" size="lg">{t('home.get_started')}</Button></Link>
                     </VStack>
                     <Box
                         className="mt-8 md:mt-0"
@@ -78,7 +99,7 @@ const Home: React.FC = () => {
             >
                 <Box className="container mx-auto text-center">
                     <Heading size="xl" className="mb-6 text-white">
-                        Key Features
+                        {t('home.features')}
                     </Heading>
                     <Flex direction={{ base: 'column', md: 'row' }} justifyContent="space-around">
                         <VStack spacing={4} maxW="xs" className="mb-8 md:mb-0">
@@ -86,10 +107,10 @@ const Home: React.FC = () => {
                                 <FaCog size={28} color="#38a169" />
                             </Box>
                             <Heading size="md" className="text-white">
-                                Interactive AI Chat
+                                {t('home.feature1')}
                             </Heading>
                             <Text className="text-white">
-                                Chat with your books and get answers to your questions in real-time.
+                                {t('home.feature1_description')}
                             </Text>
                         </VStack>
                         <VStack spacing={4} maxW="xs" className="mb-8 md:mb-0">
@@ -97,10 +118,10 @@ const Home: React.FC = () => {
                                 <FaHammer size={28} color="#38a169" />
                             </Box>
                             <Heading size="md" className="text-white">
-                                Seamless Integration
+                                {t('home.feature2')}
                             </Heading>
                             <Text className="text-white">
-                                Easily upload and integrate your study materials, including tests and PDFs.
+                                {t('home.feature2_description')}
                             </Text>
                         </VStack>
                         <VStack spacing={4} maxW="xs">
@@ -108,10 +129,10 @@ const Home: React.FC = () => {
                                 <FaMagic size={28} color="#38a169" />
                             </Box>
                             <Heading size="md" className="text-white">
-                                AI Insights
+                                {t('home.feature3')}
                             </Heading>
                             <Text className="text-white">
-                                Leverage advanced AI to gain insights and enhance your learning journey.
+                                {t('home.feature3_description')}
                             </Text>
                         </VStack>
                     </Flex>
@@ -122,7 +143,7 @@ const Home: React.FC = () => {
             <Box className="bg-gray-100 py-16 px-6">
                 <Box className="container mx-auto text-center">
                     <Heading size="xl" className="mb-6 text-gray-800">
-                        What People Say About Us
+                        {t('home.what_people_say')}
                     </Heading>
                     <Flex direction={{ base: 'column', md: 'row' }} justifyContent="space-around">
                         <VStack spacing={4} maxW="xs" className="mb-8 md:mb-0">
@@ -151,13 +172,13 @@ const Home: React.FC = () => {
             <Box className="bg-teal-500 py-16 px-6 text-white">
                 <Box className="container mx-auto text-center">
                     <Heading size="xl" className="mb-6">
-                        Ready to start?
+                        {t('home.cta_title')}
                     </Heading>
                     <Text fontSize="lg" className="mb-8">
-                        Sign up now and take your learning to the next level with ChatDocko AI.
+                        {t('home.cta_description')}
                     </Text>
                     <Button size="lg" colorScheme="whiteAlpha">
-                        Get Started
+                        {t('home.get_started')}
                     </Button>
                 </Box>
             </Box>

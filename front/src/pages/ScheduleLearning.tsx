@@ -7,7 +7,18 @@ import { Box, Heading, Flex, useColorModeValue, Text } from '@chakra-ui/react';
 import { Line, Bar, Doughnut } from 'react-chartjs-2';
 import Navbar from '../components/Navbar';
 import { LearningPlanner } from '../components/LearningPlanner';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, ArcElement, Title, Tooltip, Legend } from 'chart.js';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    BarElement,
+    ArcElement,
+    Title,
+    Tooltip,
+    Legend
+} from 'chart.js';
 
 // Register necessary Chart.js components
 ChartJS.register(
@@ -28,6 +39,10 @@ export default function ScheduleLearning() {
     const textColor = useColorModeValue('gray.800', 'white');
     const [hoveredEvent, setHoveredEvent] = useState<{ title: string; description: string } | null>(null);
 
+    // State to track study sessions and breaks
+    const [studySessions, setStudySessions] = useState<number[]>([]);
+    const [breakSessions, setBreakSessions] = useState<number[]>([]);
+
     const events = [
         { title: 'Math Study', start: '2024-08-10T10:00:00', end: '2024-08-10T12:00:00', description: 'Study for Math exam' },
         { title: 'Science Project', start: '2024-08-12T14:00:00', end: '2024-08-12T17:00:00', description: 'Complete science project' },
@@ -39,7 +54,7 @@ export default function ScheduleLearning() {
         datasets: [
             {
                 label: 'Study Hours',
-                data: [5, 7, 4, 8],
+                data: studySessions,
                 fill: true,
                 backgroundColor: 'rgba(56, 161, 169, 0.2)',
                 borderColor: 'rgba(56, 161, 169, 1)',
@@ -70,7 +85,11 @@ export default function ScheduleLearning() {
         datasets: [
             {
                 label: 'Activity Distribution',
-                data: [60, 30, 10],
+                data: [
+                    studySessions.reduce((a, b) => a + b, 0),
+                    breakSessions.reduce((a, b) => a + b, 0),
+                    10 // Example data for extracurricular
+                ],
                 backgroundColor: ['#38A1A9', '#90CDF4', '#FFD700'],
                 borderColor: ['#38A1A9', '#90CDF4', '#FFD700'],
                 borderWidth: 1,
@@ -84,6 +103,11 @@ export default function ScheduleLearning() {
 
     const handleEventMouseLeave = () => {
         setHoveredEvent(null);
+    };
+
+    const handlePomodoroComplete = (minutes: number) => {
+        setStudySessions((prev) => [...prev, minutes]);
+        // You can also handle break sessions similarly if needed
     };
 
     return (
@@ -106,7 +130,7 @@ export default function ScheduleLearning() {
                         <Heading as="h2" size="lg" mb={4} color={textColor}>
                             Learning Planner
                         </Heading>
-                        <LearningPlanner />
+                        <LearningPlanner onPomodoroComplete={handlePomodoroComplete} />
                     </Box>
                     <Box
                         bg={boxColor}

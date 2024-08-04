@@ -1,8 +1,10 @@
+// src/components/Navbar.tsx
 import React from 'react';
 import { Flex, Heading, Stack, Button, IconButton } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { useThemeContext } from '../context/ThemeContext';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { useThemeContext } from '../context/ThemeContext';
+import LanguageToggle from './LanguageToggle'; // Import the LanguageSwitcher component
 
 const Navbar: React.FC = () => {
     const { colorMode, toggleColorMode } = useThemeContext();
@@ -26,11 +28,14 @@ const Navbar: React.FC = () => {
                 <Link to="/"><Button variant="ghost">Home</Button></Link>
                 <Link to="/chat"><Button variant="ghost">Chat</Button></Link>
                 <Link to="/schedule-learning"><Button variant="ghost">Schedule Learning</Button></Link>
+                <Link to="/quiz"><Button variant="ghost">Quiz</Button></Link>
+                <Link to="/contact"><Button variant="ghost">Contact</Button></Link>
                 <IconButton
                     aria-label="Toggle dark mode"
                     icon={icon}
                     onClick={toggleColorMode}
                 />
+                <LanguageToggle /> {/* Add the LanguageSwitcher component */}
             </Stack>
         </Flex>
     );

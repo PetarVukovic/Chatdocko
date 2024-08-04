@@ -1,23 +1,27 @@
 import React, { useState } from 'react';
-import { Box, Button, Input, Textarea, VStack, Flex, Heading } from '@chakra-ui/react';
-
-export type Props = {};
+import { Box, Button, Heading, Input, VStack, Textarea, Flex } from '@chakra-ui/react';
+import PomodoroTimer from './PomodoroTimer';
 
 interface Task {
     name: string;
     description: string;
     date: string;
     time: string;
+    completedPomodoros: number;
 }
 
-export const LearningPlanner: React.FC<Props> = () => {
+export const LearningPlanner: React.FC<{
+    onPomodoroComplete: (minutes: number) => void;
+}> = ({ onPomodoroComplete }) => {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [task, setTask] = useState<Task>({
         name: '',
         description: '',
         date: '',
         time: '',
+        completedPomodoros: 0,
     });
+    const [selectedTaskIndex, setSelectedTaskIndex] = useState<number | null>(null);
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -28,8 +32,19 @@ export const LearningPlanner: React.FC<Props> = () => {
 
     const handleAddTask = () => {
         if (task.name && task.date && task.time) {
-            setTasks([...tasks, task]);
-            setTask({ name: '', description: '', date: '', time: '' });
+            setTasks([...tasks, { ...task }]);
+            setTask({ name: '', description: '', date: '', time: '', completedPomodoros: 0 });
+        }
+    };
+
+    const handlePomodoroComplete = () => {
+        if (selectedTaskIndex !== null) {
+            setTasks(prevTasks => {
+                const updatedTasks = [...prevTasks];
+                updatedTasks[selectedTaskIndex].completedPomodoros += 1;
+                return updatedTasks;
+            });
+            onPomodoroComplete(25); // Assuming each Pomodoro session is 25 minutes
         }
     };
 
@@ -87,16 +102,26 @@ export const LearningPlanner: React.FC<Props> = () => {
                             borderRadius="md"
                             shadow="md"
                             w="full"
+                            onClick={() => setSelectedTaskIndex(index)}
+                            cursor="pointer"
+                            bg={selectedTaskIndex === index ? 'teal.50' : 'white'}
                         >
                             <Heading size="md">{task.name}</Heading>
                             <Box>{task.description}</Box>
                             <Box>
                                 {task.date} at {task.time}
                             </Box>
+                            <Box>Completed Pomodoros: {task.completedPomodoros}</Box>
                         </Box>
                     ))}
                 </VStack>
             </Box>
+            {selectedTaskIndex !== null && (
+                <Box mt={8}>
+                    <Heading size="md" mb={4}>Pomodoro Timer for: {tasks[selectedTaskIndex].name}</Heading>
+                    <PomodoroTimer onSessionComplete={handlePomodoroComplete} />
+                </Box>
+            )}
         </Box>
     );
 };
